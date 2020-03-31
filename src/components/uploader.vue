@@ -53,7 +53,8 @@
             error: 'error',
             uploading: 'uploading',
             paused: 'paused',
-            waiting: 'waiting'
+            waiting: 'waiting',
+            cmd5: 'cmd5'
           }
         }
       }
@@ -67,7 +68,7 @@
     },
     methods: {
       uploadStart () {
-        this.started = true
+        // this.started = true
       },
       fileAdded (file) {
         this.$emit(kebabCase(FILE_ADDED_EVENT), file)

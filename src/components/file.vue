@@ -6,6 +6,7 @@
       :status="status"
       :paused="paused"
       :error="error"
+      :cmd5="cmd5"
       :response="response"
       :average-speed="averageSpeed"
       :formated-average-speed="formatedAverageSpeed"
@@ -26,7 +27,10 @@
       >
       <div class="uploader-file-progress" :class="progressingClass" :style="progressStyle"></div>
       <div class="uploader-file-info">
-        <div class="uploader-file-name"><i class="uploader-file-icon" :icon="fileCategory"></i>{{file.name}}</div>
+        <div class="uploader-file-name">
+          <i :class="'iconfont icon-'+fileCategory"></i>
+          {{file.name}}
+        </div>
         <div class="uploader-file-size">{{formatedSize}}</div>
         <div class="uploader-file-meta"></div>
         <div class="uploader-file-status">
@@ -52,6 +56,7 @@
   import Uploader from 'simple-uploader.js'
   import events from '../common/file-events'
   import { secondsToStr } from '../common/utils'
+  // import '../css/iconfont.css'
 
   const COMPONENT_NAME = 'uploader-file'
 
@@ -73,6 +78,7 @@
       return {
         response: null,
         paused: false,
+        cmd5: false,
         error: false,
         averageSpeed: 0,
         currentSpeed: 0,
@@ -98,7 +104,8 @@
           image: ['gif', 'jpg', 'jpeg', 'png', 'bmp', 'webp'],
           video: ['mp4', 'm3u8', 'rmvb', 'avi', 'swf', '3gp', 'mkv', 'flv'],
           audio: ['mp3', 'wav', 'wma', 'ogg', 'aac', 'flac'],
-          document: ['doc', 'txt', 'docx', 'pages', 'epub', 'pdf', 'numbers', 'csv', 'xls', 'xlsx', 'keynote', 'ppt', 'pptx']
+          document: ['doc', 'txt', 'docx', 'pages', 'epub', 'pdf', 'numbers', 'csv', 'xls', 'xlsx', 'keynote', 'ppt', 'pptx'],
+          zip: ['zip', 'rar', 'gz', 'tar', '7z']
         }
         Object.keys(typeMap).forEach((_type) => {
           const extensions = typeMap[_type]
@@ -127,13 +134,19 @@
         const isComplete = this.isComplete
         const isError = this.error
         const paused = this.paused
+        const cmd5 = this.cmd5
         if (isComplete) {
           return 'success'
         } else if (isError) {
           return 'error'
         } else if (isUploading) {
           return 'uploading'
+        } else if (cmd5) {
+          return 'cmd5'
         } else if (paused) {
+          // if (cmd5) {
+          //   return 'cmd5'
+          // }
           return 'paused'
         } else {
           return 'waiting'
@@ -246,7 +259,7 @@
       }
     },
     mounted () {
-      const staticProps = ['paused', 'error', 'averageSpeed', 'currentSpeed']
+      const staticProps = ['paused', 'error', 'averageSpeed', 'currentSpeed', 'cmd5']
       const fnProps = [
         'isComplete',
         'isUploading',

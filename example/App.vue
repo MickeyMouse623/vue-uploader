@@ -7,8 +7,8 @@
     data () {
       return {
         options: {
-          target: '//localhost:3000/upload', // '//jsonplaceholder.typicode.com/posts/',
-          testChunks: false
+          target: 'http://helloweba.test/demo/2020/uploader.php', // '//jsonplaceholder.typicode.com/posts/',
+          testChunks: false,
         },
         attrs: {
           accept: 'image/*'
@@ -18,7 +18,8 @@
           error: '出错了',
           uploading: '上传中',
           paused: '暂停中',
-          waiting: '等待中'
+          waiting: '等待中',
+          cmd5: '计算md5...'
         }
       }
     },
@@ -28,7 +29,7 @@
       },
       fileComplete () {
         console.log('file complete', arguments)
-      }
+      },
     },
     mounted () {
       this.$nextTick(() => {
