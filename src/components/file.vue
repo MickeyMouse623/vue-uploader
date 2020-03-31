@@ -192,6 +192,7 @@
     methods: {
       _actionCheck () {
         this.paused = this.file.paused
+        this.cmd5 = this.file.cmd5
         this.error = this.file.error
         this.isUploading = this.file.isUploading()
       },
