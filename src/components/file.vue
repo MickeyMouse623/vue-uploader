@@ -32,7 +32,7 @@
           {{file.name}}
         </div>
         <div class="uploader-file-size">{{formatedSize}}</div>
-        <div class="uploader-file-meta"></div>
+        <!-- <div class="uploader-file-meta"></div> -->
         <div class="uploader-file-status">
           <span v-show="status !== 'uploading'">{{statusText}}</span>
           <span v-show="status === 'uploading'">
@@ -397,34 +397,20 @@
     line-height: 1;
     text-indent: 0;
   }
-  .uploader-file-icon[icon="folder"]::before {
-    content: "📂";
-  }
-  .uploader-file-icon[icon="image"]::before {
-    content: "📊";
-  }
-  .uploader-file-icon[icon="video"]::before {
-    content: "📹";
-  }
-  .uploader-file-icon[icon="audio"]::before {
-    content: "🎵";
-  }
-  .uploader-file-icon[icon="document"]::before {
-    content: "📋";
-  }
+  
   .uploader-file-size {
-    width: 13%;
-    text-indent: 10px;
+    width: 18%;
+    text-indent: 2px;
   }
-  .uploader-file-meta {
+  /*.uploader-file-meta {
     width: 8%;
-  }
+  }*/
   .uploader-file-status {
     width: 24%;
-    text-indent: 20px;
+    text-indent: 2px;
   }
   .uploader-file-actions {
-    width: 10%;
+    width: 12%;
   }
   .uploader-file-actions > span {
     display: none;
